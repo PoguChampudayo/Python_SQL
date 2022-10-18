@@ -5,9 +5,9 @@ def create_db(conn):
         cur.execute('''
         CREATE TABLE IF NOT EXISTS clients(
         id SERIAL PRIMARY KEY,
-        name VARCHAR(40),
-        surname VARCHAR(40),
-        email VARCHAR(40));
+        name VARCHAR(40) NOT NULL,
+        surname VARCHAR(40) NOT NULL,
+        email VARCHAR(40) NOT NULL);
         ''')
         
         cur.execute('''
