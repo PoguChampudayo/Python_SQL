@@ -93,10 +93,10 @@ def delete_client(conn):
         return f'Клиент с id {client_id} успешно удален'
 
 def find_client(conn):
-    name = input('Введите имя клиента: ')
-    surname = input('Введите фамилию клиента: ')
-    email = input('Введите email клиента: ')
-    phone = input('Введите номер телефона: ')
+    name = input('Введите имя клиента (нажмите Enter для пропуска): ')
+    surname = input('Введите фамилию клиента (нажмите Enter для пропуска): ')
+    email = input('Введите email клиента (нажмите Enter для пропуска): ')
+    phone = input('Введите номер телефона (нажмите Enter для пропуска): ')
     with conn.cursor() as cur:
         cur.execute(f'''
         SELECT a.id, a.name, a.surname, a.email FROM (select * from clients left join phones on phones.client_id = clients.id) as a
