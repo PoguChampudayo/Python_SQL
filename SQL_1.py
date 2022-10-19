@@ -55,7 +55,9 @@ def change_client(conn):
             WHERE id = {client_id};
             ''')
             conn.commit()
-    return f'Данные клиента с id {client_id} успешно изменены'
+        return f'Данные клиента с id {client_id} успешно изменены'
+    else:
+        print('Данных для изменения не введено')
 
 def delete_phone(conn):
     client_id = int(input('Введите ID клиента: '))
@@ -104,12 +106,15 @@ def find_client(conn):
                     ''')
         conn.commit()
         result = cur.fetchone()
-    return f'''Данные о клиенте:
-            id = {result[0]}
-            Имя = {result[1]}
-            Фамилия = {result[2]}
-            email = {result[3]}
-            '''
+    if result:
+        return f'''Данные о клиенте:
+                id = {result[0]}
+                Имя = {result[1]}
+                Фамилия = {result[2]}
+                email = {result[3]}
+                '''
+    else:
+        return 'Данных о клиенте не найдено'
 
 def get_phones(conn):
     client_id = int(input('Введите ID клиента: '))
@@ -121,8 +126,11 @@ def get_phones(conn):
         
         conn.commit()
         result = cur.fetchall()
-    return '\n'.join([number[0] for number in result])
-
+    if result:
+        return '\n'.join([number[0] for number in result])
+    else:
+        return 'Телефонных номеров у клиента не обнаружено'
+    
 def get_help(conn):
     print('''Список доступных команд:
           create db - создает таблицы clients и phones
